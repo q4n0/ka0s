@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-const allocSize = 8 * 1024 * 1024 * 1024 // 8 GB
-const cpuLoadIterations = 10000000
+const allocSize = 6 * 1024 * 1024 * 1024 // 6 GB
+const cpuLoadIterations = 1000000 // Adjust this based on CPU load preference
 
 func cpuLoad() {
 	for i := 0; i < cpuLoadIterations; i++ {
@@ -16,9 +16,12 @@ func cpuLoad() {
 }
 
 func main() {
-	// Allocate 1 GB of memory
+	// Allocate 6 GB of memory
 	mem := make([]byte, allocSize)
-	fmt.Printf("Allocated %d MB of memory.\n", allocSize/(1024*1024))
+	fmt.Printf("Allocated %d GB of memory.\n", allocSize/(1024*1024*1024))
+
+	// Use the allocated memory to prevent unused variable error
+	_ = mem
 
 	// Create a goroutine to consume CPU
 	go cpuLoad()
